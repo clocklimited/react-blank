@@ -1,0 +1,21 @@
+# Vim
+.*.sw[a-z]
+*.un~i
+
+# OsX
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Project Specific
+
+node_modules
+npm-debug.log
+.eslintcache
+yarn-error.log
+
+build
+dist
+
+.cache

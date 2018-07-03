@@ -1,0 +1,7 @@
+{
+  "global": {
+    "title": "__TITLE___",
+    "platform": "__PLATFORM___",
+    "description": "__DESCRIPTION___"
+   }
+}

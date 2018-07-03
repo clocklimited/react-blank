@@ -1,0 +1,32 @@
+{
+  "presets": [
+    [
+      "env", {
+        "targets": {
+          "browsers": [ "last 2 versions", "safari >= 7", "IE 10" ]
+        }
+      }
+    ],
+    "es2015",
+    "react"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "babel-plugin-styled-components",
+    [
+      "inline-react-svg", {
+        "svgo": {
+          "plugins": [
+            { "cleanupIds": true },
+            { "collapseGroups": true },
+            { "removeStyleElement": true },
+            { "removeTitle": true },
+            { "removeXMLNS": true },
+            { "removeAttrs": { "attrs": "data.*" }
+            }
+          ]
+        }
+      }
+    ]
+  ]
+}
