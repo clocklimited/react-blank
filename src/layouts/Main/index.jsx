@@ -1,10 +1,20 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { node } from 'prop-types'
+import { injectGlobal } from 'styled-components'
+import { Provider } from 'rebass'
+import theme from '../../style/theme'
+
+injectGlobal`
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+  }
+`
 
 const Main = ({ children }) =>
-  <Fragment>
+  <Provider theme={theme}>
     {children}
-  </Fragment>
+  </Provider>
 
 Main.propTypes = {
   children: node

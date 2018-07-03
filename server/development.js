@@ -5,7 +5,7 @@ import hotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from '../config/webpack.development'
 import createRouter from './router'
 import chalk from 'chalk'
-import { prepareUrls } from 'react-dev-utils/WebpackDevServerUtils'
+import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils'
 import applyCommonMiddleware from './common-middleware'
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware'
 import http from 'http'
@@ -28,23 +28,29 @@ app
     noInfo: true,
     compress: true,
     hot: true,
-    clientLogLevel: 'none'
+    stats: 'errors-only'
   }))
   .use(hotMiddleware(compiler))
 
 createRouter(app, [ '/main.js' ])
 const urls = prepareUrls(config.protocol, config.host, config.port)
 const server = http.createServer(app)
-server.listen(config.port, config.host, err => {
-  if (err) return console.error(err)
-  console.log(chalk.cyan('\nStarting the development server...\n'))
-  console.log(chalk.yellow(`\t${urls.localUrlForTerminal}\n`))
-  console.log(chalk.yellow(`\t${urls.lanUrlForTerminal}\n`))
-  ;[ 'SIGINT', 'SIGTERM' ].forEach(sig => {
-    process.on(sig, () => {
-      console.log(chalk.red('Shutting down...'))
-      server.close()
-      process.exit()
+
+choosePort(config.host, config.port).then(port => {
+  if (port === null) {
+    return console.error(chalk.red('Unable to find free port'))
+  }
+  server.listen(config.port, config.host, err => {
+    if (err) return console.error(err)
+    console.log(chalk.cyan('\nStarting the development server...\n'))
+    console.log(chalk.yellow(`\t${urls.localUrlForTerminal}\n`))
+    console.log(chalk.yellow(`\t${urls.lanUrlForTerminal}\n`))
+    ;[ 'SIGINT', 'SIGTERM' ].forEach(sig => {
+      process.on(sig, () => {
+        console.log(chalk.red('Shutting down...'))
+        server.close()
+        process.exit()
+      })
     })
   })
 })

@@ -1,9 +1,13 @@
 const { resolve } = require('path')
+const fs = require('fs')
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = relativePath => resolve(appDirectory, relativePath)
+
 module.exports = {
-  appSrc: resolve(__dirname, '../src'),
-  appIndexJs: resolve(__dirname, '../src/index.jsx'),
-  appBuild: resolve(__dirname, '../build'),
-  projectRoot: resolve(__dirname, '..'),
+  appSrc: resolveApp('src'),
+  appIndexJs: resolveApp('src/index.jsx'),
+  appBuild: resolveApp('build'),
+  projectRoot: resolveApp(''),
   appUrlPath: '/',
-  staticFiles: resolve(__dirname, '../static')
+  staticFiles: resolveApp('static')
 }
