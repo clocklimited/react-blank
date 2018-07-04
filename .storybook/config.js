@@ -6,7 +6,7 @@ import config from '../config.json'
 import BrowserRouter from 'react-router-dom/BrowserRouter'
 import 'babel-polyfill'
 import Main from '../src/layouts/Main'
-const req = require.context('../src', true, /\.stories\.jsx$/)
+const req = require.context('../src', true, /stories\.jsx$/)
 const loadStories = () => {
   req.keys().forEach((filename) => req(filename))
 }
