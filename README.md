@@ -1,5 +1,7 @@
 # __NAME___
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/clocklimited/react-blank.svg)](https://greenkeeper.io/)
+
 __DESCRIPTION___
 
 ```
